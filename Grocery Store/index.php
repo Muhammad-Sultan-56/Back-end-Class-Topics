@@ -11,11 +11,8 @@
 
 <body>
 
-    <!-- navbar include -->
+    <!-- header-section include -->
     <?php require_once("./includes/header.php") ?>
-
-    <!-- search and all departments section -->
-    <?php require_once("./includes/search-all-department.php") ?>
 
 
     <!-- Categories Section Begin -->

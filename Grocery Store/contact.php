@@ -11,11 +11,10 @@
 </head>
 
 <body>
-    <!-- navbar include -->
-    <?php require_once("./includes/header.php") ?>
 
-    <!-- search and all departments section -->
-    <?php require_once("./includes/search-all-department.php") ?>
+    <!-- header-section include -->
+    <?php require_once("./includes/header.php") ?>
+    
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
