@@ -29,6 +29,9 @@
 
     <script src="./js/dashboard/dashboard-1.js"></script>
 
+    <!-- font awsome -->
+    <script src="./font-awsome/js/all.js"></script>
+
 
 
     <!-- data table plugins -->

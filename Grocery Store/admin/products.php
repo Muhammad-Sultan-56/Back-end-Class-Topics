@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Categories - Home</title>
+    <title>Products</title>
 
     <!-- css-links include -->
     <?php require_once("./includes/css-links.php") ?>
@@ -23,120 +23,113 @@
     <div class="content-body p-3">
 
 
-        <!-- add category container -->
-        <div class="container mt-3 bg-white p-4">
-
-            <h3> <i class="fa fa-plus text-primary"></i> Add Category</h3>
-            <hr>
-            <form action="" class="row">
-                <div class="col-lg-4">
-                    <label class="form-label" for="val-username">Category <span class="text-danger">*</span>
-                    </label>
-                    <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter here..." required>
-                </div>
-
-
-                <div class="col-lg-4">
-                    <label class="form-label" for="val-username">Category Image <span class="text-danger">*</span>
-                    </label>
-                    <input type="file" class="form-control" id="val-username" name="val-username" placeholder="Enter here..." required>
-                </div>
-
-
-                <div class="col-lg-4">
-                    <label for=""></label>
-
-                    <button class="btn btn-primary btn-lg mt-2 w-100">Add Category</button>
-                </div>
-
-            </form>
-        </div>
-
 
 
         <!-- view categories container -->
         <div class="container mt-3 bg-white p-4">
-            <h3> <i class="fa fa-eye text-primary"></i> View Categories</h3>
+            <h3> <i class="fa fa-eye text-primary"></i> View Products</h3>
             <hr>
 
+            <div class="d-flex justify-content-end">
+                <a href="./add-products.php" class="btn btn-primary"><i class="fa fa-plus"></i> Add Proudcts</a>
+            </div>
 
             <div class="table-responsive">
                 <table class="table table-striped table-bordered zero-configuration">
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Unit Price</th>
+                            <th>Category</th>
                             <th>Image</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
+                            <td>1200</td>
                             <td>System Architect</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a> 
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                         <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a> 
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
+                            <td>None</td>
+                            <td><span class="badge bg-success text-white px-2">Availble</span></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Link 1</a>
-                                         <a class="dropdown-item" href="#">Link 2</a>
-                                          <a class="dropdown-item" href="#">Link 3</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>1200</td>
+                            <td>System Architect</td>
+                            <td>None</td>
+                            <td><span class="badge bg-success text-white px-2">Availble</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>1200</td>
+                            <td>System Architect</td>
+                            <td>None</td>
+                            <td><span class="badge bg-danger text-white px-2">Unavailble</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
                                     </div>
                                 </div>
                             </td>
 
                         </tr>
                         <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
+                            <td>Tiger Nixon</td>
+                            <td>1200</td>
+                            <td>System Architect</td>
+                            <td>None</td>
+                            <td><span class="badge bg-success text-white px-2">Availble</span></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a> 
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
+                                        <a class="dropdown-item" href="#">Link 3</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>1200</td>
+                            <td>System Architect</td>
+                            <td>None</td>
+                            <td><span class="badge bg-danger text-white px-2">Unavailble</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Link 1</a>
+                                        <a class="dropdown-item" href="#">Link 2</a>
                                         <a class="dropdown-item" href="#">Link 3</a>
                                     </div>
                                 </div>

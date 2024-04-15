@@ -8,7 +8,7 @@
                     <li class="nav-label">Dashboard</li>
                     <li>
                         <a href="index.php" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        <i class="fa-solid fa-gauge-high text-primary"></i> <span class="nav-text">Dashboard</span>
                         </a>
 
                     </li>
@@ -16,10 +16,15 @@
 
                     <li>
                         <a href="categories.php" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">Categories</span>
+                        <i class="fa-solid fa-layer-group text-primary"></i> <span class="nav-text"> Categories</span>
                         </a>
-
                     </li>
+
+
+                    <li>
+                        <a href="products.php" aria-expanded="false">
+                        <i class="fa-solid fa-cubes text-primary"></i> <span class="nav-text"> Products</span>
+                        </a>
                     </li>
 
 
