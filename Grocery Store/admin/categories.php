@@ -1,3 +1,38 @@
+<?php
+$con = mysqli_connect("localhost" , "root" , "" , "ogani") or die("Db not Connected");
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // echo "<pre>"; print_r($_POST);
+    //  echo "<pre>"; print_r($_FILES['image']); 
+    
+    $category = $_POST['category'];
+
+    $targetDir = "./images/categories/";
+    $newName   = time() . $_FILES['image']['name'];
+
+    $max_size = 5 * 1024 * 1024;
+
+    if($_FILES['image']['error'] === 0) {
+        if($_FILES['image']['size'] > $max_size) {
+            die("image size is too large");
+        }
+        move_uploaded_file($_FILES['image']['tmp_name'], $targetDir . $newName );
+
+        // save info into db
+        $query = "INSERT INTO categories VALUES(null, '$category', '$newName') ";
+        
+        if(mysqli_query($con, $query)) {
+            echo "successfully created";
+        }
+    }
+}
+
+
+//exit;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +43,7 @@
     <title>Categories - Home</title>
 
     <!-- css-links include -->
-    <?php require_once("./includes/css-links.php") ?>
+    <?php require_once "./includes/css-links.php" ?>
 
 </head>
 
@@ -28,18 +63,18 @@
 
             <h3> <i class="fa fa-plus text-primary"></i> Add Category</h3>
             <hr>
-            <form action="" class="row">
+            <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data" class="row">
                 <div class="col-lg-4">
                     <label class="form-label" for="val-username">Category <span class="text-danger">*</span>
                     </label>
-                    <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter here..." required>
+                    <input type="text" class="form-control" id="val-username" name="category" placeholder="Enter here..." required>
                 </div>
 
 
                 <div class="col-lg-4">
                     <label class="form-label" for="val-username">Category Image <span class="text-danger">*</span>
                     </label>
-                    <input type="file" class="form-control" id="val-username" name="val-username" placeholder="Enter here..." required>
+                    <input type="file" class="form-control" id="val-username" name="image" accept="image/*" placeholder="Enter here..." required>
                 </div>
 
 
@@ -70,9 +105,21 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                    <?php 
+                    
+                    $select = "SELECT * FROM categories";
+                    $result = mysqli_query($con , $select);
+
+                    if(mysqli_num_rows($result) > 0){
+
+                        while($row = mysqli_fetch_assoc($result)){
+
+                    
+                    ?>
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
+                            <td><?php echo $row['category']?></td>
+                            <td><img src="./images/categories/<?php echo $row['image'] ?>" height="50px" alt=""></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
@@ -84,65 +131,13 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                         <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a> 
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
 
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a>
-                                         <a class="dropdown-item" href="#">Link 2</a>
-                                          <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a> 
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
+                        <?php  
+                            }
+                        }
+                        
+                        ?>
+                       
                     </tbody>
                 </table>
             </div>
