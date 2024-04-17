@@ -1,29 +1,30 @@
 <?php
-$con = mysqli_connect("localhost" , "root" , "" , "ogani") or die("Db not Connected");
+
+//  $targetDir = "categories";
+//  echo $targetDir = __FILE__ . "/images/$targetDir/"; exit;
+// exit;
 
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+require_once("./db-con.php");
+require_once "./includes/helpers.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // echo "<pre>"; print_r($_POST);
-    //  echo "<pre>"; print_r($_FILES['image']); 
-    
+    // echo "<pre>"; print_r($_FILES['image']); 
+    //exit;
+
     $category = $_POST['category'];
 
-    $targetDir = "./images/categories/";
-    $newName   = time() . $_FILES['image']['name'];
+    // upload image
+    $data = uploadImage("categories", $_FILES['image']);
 
-    $max_size = 5 * 1024 * 1024;
-
-    if($_FILES['image']['error'] === 0) {
-        if($_FILES['image']['size'] > $max_size) {
-            die("image size is too large");
-        }
-        move_uploaded_file($_FILES['image']['tmp_name'], $targetDir . $newName );
-
+    if ($data['errors'] === false) {
         // save info into db
-        $query = "INSERT INTO categories VALUES(null, '$category', '$newName') ";
-        
-        if(mysqli_query($con, $query)) {
-            echo "successfully created";
+        $name = $data['result'];
+        $query = "INSERT INTO categories VALUES(null, '$category', '$name') ";
+
+        if (!mysqli_query($con, $query)) {
+            die("query failed");
         }
     }
 }
@@ -63,7 +64,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <h3> <i class="fa fa-plus text-primary"></i> Add Category</h3>
             <hr>
-            <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data" class="row">
+
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" class="row">
+
                 <div class="col-lg-4">
                     <label class="form-label" for="val-username">Category <span class="text-danger">*</span>
                     </label>
@@ -72,9 +75,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
                 <div class="col-lg-4">
-                    <label class="form-label" for="val-username">Category Image <span class="text-danger">*</span>
+                    <label class="form-label" for="userimage">Category Image <span class="text-danger">*</span>
                     </label>
-                    <input type="file" class="form-control" id="val-username" name="image" accept="image/*" placeholder="Enter here..." required>
+                    <input type="file" class="form-control" id="userimage" name="image" accept="image/*" required>
                 </div>
 
 
@@ -85,6 +88,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
             </form>
+
+            <?php if (isset($data) && $data['errors'] === true) { ?>
+                <div class="alert alert-danger mt-2 uploadingErr"><?php echo $data['result'] ?></div>
+            <?php } ?>
+
+
+            <?php if (isset($data) && $data['errors'] === false) { ?>
+                <div class="alert alert-success mt-2 uploadingErr"> <b>Congratulations! </b> Operation Performed Successfully...</div>
+            <?php } ?>
+
         </div>
 
 
@@ -106,38 +119,38 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </thead>
                     <tbody>
 
-                    <?php 
-                    
-                    $select = "SELECT * FROM categories";
-                    $result = mysqli_query($con , $select);
+                        <?php
 
-                    if(mysqli_num_rows($result) > 0){
+                        $select = "SELECT * FROM categories";
+                        $result = mysqli_query($con, $select);
 
-                        while($row = mysqli_fetch_assoc($result)){
+                        if (mysqli_num_rows($result) > 0) {
 
-                    
-                    ?>
-                        <tr>
-                            <td><?php echo $row['category']?></td>
-                            <td><img src="./images/categories/<?php echo $row['image'] ?>" height="50px" alt=""></td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a> 
-                                        <a class="dropdown-item" href="#">Link 2</a> 
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            while ($row = mysqli_fetch_assoc($result)) {
 
-                        <?php  
+
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['category'] ?></td>
+                                    <td><img src="./images/categories/<?php echo $row['image'] ?>" height="50px" alt=""></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Link 1</a>
+                                                <a class="dropdown-item" href="#">Link 2</a>
+                                                <a class="dropdown-item" href="#">Link 3</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                        <?php
                             }
                         }
-                        
+
                         ?>
-                       
+
                     </tbody>
                 </table>
             </div>
@@ -158,6 +171,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php require_once("./includes/javascript-links.php")  ?>
 
 
+
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".uploadingErr").hide();
+            }, 3000);
+
+        })
+    </script>
 
 
 </body>

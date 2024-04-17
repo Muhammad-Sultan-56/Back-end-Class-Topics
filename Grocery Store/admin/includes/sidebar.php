@@ -28,6 +28,13 @@
                     </li>
 
 
+                    <li>
+                        <a href="#" aria-expanded="false">
+                        <i class="fa-solid fa-cart-shopping text-primary"></i> <span class="nav-text"> Orders</span>
+                        </a>
+                    </li>
+
+
                 </ul>
             </div>
         </div>
