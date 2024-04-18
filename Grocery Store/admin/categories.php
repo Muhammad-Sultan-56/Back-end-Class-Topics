@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- add category container -->
         <div class="container mt-3 bg-white p-4">
 
-            <h3> <i class="fa fa-plus text-primary"></i> Add Category</h3>
+            <h3> <i class="fa fa-plus text-success"></i> Add Category</h3>
             <hr>
 
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" class="row">
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-lg-4">
                     <label for=""></label>
 
-                    <button class="btn btn-primary btn-lg mt-2 w-100">Add Category</button>
+                    <button class="btn btn-success text-white btn-lg mt-2 w-100"><i class="fa fa-plus"></i> Add Category</button>
                 </div>
 
             </form>
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- view categories container -->
         <div class="container mt-3 bg-white p-4">
-            <h3> <i class="fa fa-eye text-primary"></i> View Categories</h3>
+            <h3> <i class="fa fa-eye text-success"></i> View Categories</h3>
             <hr>
 
 
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <td><img src="./images/categories/<?php echo $row['image'] ?>" height="50px" alt=""></td>
                                     <td>
                                         <div class="dropdown">
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                            <button type="button" class="btn btn-success text-white dropdown-toggle" data-toggle="dropdown">Actions</button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="#">Link 1</a>
                                                 <a class="dropdown-item" href="#">Link 2</a>

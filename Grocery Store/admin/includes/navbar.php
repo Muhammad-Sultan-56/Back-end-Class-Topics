@@ -22,7 +22,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <div class="brand-logo">
+            <div class="brand-logo bg-success">
                 <a href="index.php">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
@@ -64,7 +64,7 @@
                     <ul class="clearfix">
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1">3</span>
+                                <span class="badge badge-pill bg-success">3</span>
                             </a>
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
