@@ -2,10 +2,10 @@
 
 
 
-function uploadImage($targetDir = "", $file, $size = 1)
+function uploadImage($targetDir = "", $file, $size = 5)
 {
     $targetDir = "images/$targetDir/";
-    $newName   = time() . $file['name'];
+    $newName   = rand(0 , 100). $file['name'];
 
     $data = ['errors' => false, 'result' => null];
 

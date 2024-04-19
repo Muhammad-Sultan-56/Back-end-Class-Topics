@@ -4,8 +4,6 @@
 
 require_once "./db-con.php";
 require_once "./includes/helpers.php";
-require_once "./includes/css-links.php";
-require_once "./includes/javascript-links.php";
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -14,11 +12,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // echo "<pre>"; print_r($_FILES); echo "</pre>";
 
         // upload image
-        $data = uploadImage("products", $_FILES['image']);
+        $data = uploadImage("product", $_FILES['image']);
 
         if ($data['errors'] === false) {
             // save info into db
             $name = $data['result'];
+
+            // echo $name;
+            // exit;
+
             $query = "INSERT INTO `products`(`name`, `unit_price`, `category_id`, `quantity`, `image`, `description`) 
             VALUES ('$_POST[name]','$_POST[unit_price]' ,'$_POST[category]','$_POST[quantity]','$name','$_POST[description]') ";
     
