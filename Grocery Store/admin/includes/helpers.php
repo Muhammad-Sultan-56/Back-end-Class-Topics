@@ -1,8 +1,8 @@
 <?php
+session_start();
 
 
-
-function uploadImage($targetDir = "", $file, $size = 5)
+function uploadImage($targetDir = "", $file, $size = 5, $direct)
 {
     $targetDir = "images/$targetDir/";
     $newName   = time() . $file['name'];
@@ -14,34 +14,37 @@ function uploadImage($targetDir = "", $file, $size = 5)
 
     if ($file['error'] === 0) {
         if ($file['size'] > $max_size) {
-            $data['errors'] = true;
-            $data['result'] = "Image size is too large";
-            return $data;
+            $_SESSION['imgErr'] = "Image size is too large";
+            header("Location:$direct.php");
+
+            exit;
         }
 
         // check image extension
         if (in_array($file['type'], $types) === false) {
-            $data['errors'] = true;
-            $data['result'] = "Extension not supported";
-            return $data;
+            $_SESSION['imgErr'] = "Image size is too large";
+            header("Location:$direct.php");
+            exit;
         }
 
-        if(move_uploaded_file($file['tmp_name'], $targetDir . $newName) == true ) {
+        if (move_uploaded_file($file['tmp_name'], $targetDir . $newName) == true) {
             $data['errors'] = false;
             $data['result'] = $newName;
             return $data;
         }
-        
     } else {
-        $data['errors'] = true;
-        $data['result'] = "something went wrong";
+        $_SESSION['imgErr'] = "something went wrong";
+        header("Location:$direct.php");
     }
 
     return $data;
 }
 
 
-function pp($data) {
-    echo "<pre>"; print_r($data); echo "</pre>";
+function pp($data)
+{
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
     exit;
 }

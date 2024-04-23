@@ -16,15 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $category = $_POST['category'];
 
     // upload image
-    $data = uploadImage("categories", $_FILES['image']);
+    $data = uploadImage("categories", $_FILES['image'], 3, "categories");
 
     if ($data['errors'] === false) {
         // save info into db
         $name = $data['result'];
         $query = "INSERT INTO categories VALUES(null, '$category', '$name') ";
 
-        if (!mysqli_query($con, $query)) {
-            die("query failed");
+        if (mysqli_query($con, $query)) {
+
+            $_SESSION['success'] = "Category has been added successfully...!";
+        } else {
+            $_SESSION['error'] = "Category has not been added...!";
         }
     }
 }
@@ -62,7 +65,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- add category container -->
         <div class="container mt-3 bg-white p-4">
 
-            <h3> <i class="fa fa-plus text-success"></i> Add Category</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3> <i class="fa fa-plus text-success"></i> Add Category</h3>
+                </div>
+                <div class="col-md-8">
+                    <?php
+
+                    if (!empty($_SESSION['success'])) {
+                        $msg = $_SESSION['success'];
+                        echo " <div class='alert alert-success alert-dismissible fade show credErr'>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span>
+                            </button> <strong>Congratulation! </strong> $msg</div>";
+                    }
+                    unset($_SESSION['success']);
+
+
+                    if (!empty($_SESSION['error'])) {
+                        $msg = $_SESSION['error'];
+                        echo " <div class='alert alert-danger alert-dismissible fade show credErr'>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span>
+                            </button> <strong>Warning! </strong> $msg</div>";
+                    }
+                    unset($_SESSION['error']);
+
+                    if (!empty($_SESSION['imgErr'])) {
+                        $msg = $_SESSION['imgErr'];
+                        echo " <div class='alert alert-danger alert-dismissible fade show credErr'>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span>
+                            </button> <strong>Warning! </strong> $msg</div>";
+                    }
+                    unset($_SESSION['imgErr']);
+
+                    ?>
+                </div>
+            </div>
             <hr>
 
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" class="row">
@@ -89,14 +126,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             </form>
 
-            <?php if (isset($data) && $data['errors'] === true) { ?>
-                <div class="alert alert-danger mt-2 uploadingErr"><?php echo $data['result'] ?></div>
-            <?php } ?>
-
-
-            <?php if (isset($data) && $data['errors'] === false) { ?>
-                <div class="alert alert-success mt-2 uploadingErr"> <b>Congratulations! </b> Operation Performed Successfully...</div>
-            <?php } ?>
 
         </div>
 
@@ -177,6 +206,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $(document).ready(function() {
             setTimeout(function() {
                 $(".uploadingErr").hide();
+            }, 3000);
+
+
+            setTimeout(function() {
+                $(".credErr").hide();
             }, 3000);
 
         })
