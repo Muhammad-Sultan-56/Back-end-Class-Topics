@@ -1,5 +1,5 @@
 <?php
-
+require_once("./auth.php");
 //  $targetDir = "categories";
 //  echo $targetDir = __FILE__ . "/images/$targetDir/"; exit;
 // exit;
@@ -7,6 +7,8 @@
 
 require_once("./db-con.php");
 require_once "./includes/helpers.php";
+
+// exit;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // echo "<pre>"; print_r($_POST);
@@ -205,12 +207,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                $(".uploadingErr").hide();
+                $(".uploadingErr").remove();
             }, 3000);
 
 
             setTimeout(function() {
-                $(".credErr").hide();
+                $(".credErr").remove();
             }, 3000);
 
         })

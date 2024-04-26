@@ -1,8 +1,6 @@
 <?php
-session_start();
 
-
-function uploadImage($targetDir = "", $file, $size = 5, $direct)
+function uploadImage($targetDir = "", $file, $size, $direct)
 {
     $targetDir = "images/$targetDir/";
     $newName   = time() . $file['name'];
@@ -13,10 +11,10 @@ function uploadImage($targetDir = "", $file, $size = 5, $direct)
     $types = ['image/jpg', 'image/png', 'image/jpeg'];
 
     if ($file['error'] === 0) {
+
         if ($file['size'] > $max_size) {
             $_SESSION['imgErr'] = "Image size is too large";
             header("Location:$direct.php");
-
             exit;
         }
 

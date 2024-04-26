@@ -1,3 +1,5 @@
+<?php require_once("./auth.php") ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,43 +51,43 @@
                     <tbody>
 
 
-                    <?php  
-                    
-                    require_once("./db-con.php");
-                    
-                    $get_products = "SELECT products.*, categories.category FROM products 
+                        <?php
+
+                        require_once("./db-con.php");
+
+                        $get_products = "SELECT products.*, categories.category FROM products 
                     LEFT JOIN categories 
                     ON products.category_id = categories.id";
 
-                       $result = mysqli_query($con , $get_products);
+                        $result = mysqli_query($con, $get_products);
 
-                    if(mysqli_num_rows($result) > 0){
-                        while($row = mysqli_fetch_assoc($result)){
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
 
 
-                    ?>
+                        ?>
 
-                        <tr>
-                            <td><?= $row['name'] ?></td>
-                            <td><?= $row['unit_price'] ?></td>
-                            <td><?= $row['category'] ?></td>
-                            <td><img src="./images/product/<?php echo $row['image'] ?>" alt="Product Image" height="60px"></td>
-                            <td><span class="badge bg-success text-white p-1"><?=$row['status'] ?></span></td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-success text-white dropdown-toggle" data-toggle="dropdown">Actions</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Link 1</a>
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                        <a class="dropdown-item" href="#">Link 3</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                <tr>
+                                    <td><?= $row['name'] ?></td>
+                                    <td><?= $row['unit_price'] ?></td>
+                                    <td><?= $row['category'] ?></td>
+                                    <td><img src="./images/product/<?php echo $row['image'] ?>" alt="Product Image" height="60px"></td>
+                                    <td><span class="badge bg-success text-white p-1"><?= $row['status'] ?></span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-success text-white dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Link 1</a>
+                                                <a class="dropdown-item" href="#">Link 2</a>
+                                                <a class="dropdown-item" href="#">Link 3</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                        <?php 
-                             }
-                            } 
+                        <?php
+                            }
+                        }
                         ?>
 
                     </tbody>

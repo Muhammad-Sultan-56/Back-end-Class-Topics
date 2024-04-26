@@ -1,3 +1,5 @@
+<?php require_once("./auth.php") ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +31,7 @@
 
         </div>
 
-        </div> <!--*** Main wrapper end *****-->
+    </div> <!--*** Main wrapper end *****-->
 
     <!-- footer include -->
     <?php require_once("./includes/footer.php")  ?>

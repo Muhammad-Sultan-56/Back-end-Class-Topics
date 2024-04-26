@@ -34,16 +34,14 @@ if (isset($_POST['login'])) {
     // if (password_verify($password, $user['password']) === false) {
     //     die("invalid credentials");
     // }
-    if ($password != $exists['password']) {
+    if ($password != $user['password']) {
         $_SESSION['invalid'] = "Invalid Credentials...!";
         header("Location:login.php");
         exit;
+    } else {
+        $_SESSION['login'] = true;
+        $_SESSION['user_id'] = $user['id'];
+
+        header("Location:index.php");
     }
-
-
-
-    $_SESSION['login'] = true;
-    $_SESSION['user_id'] = $user['id'];
-
-    header("Location:index.php");
 }

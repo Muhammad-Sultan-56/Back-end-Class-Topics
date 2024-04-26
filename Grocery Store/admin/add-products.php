@@ -1,3 +1,4 @@
+<?php require_once("./auth.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +57,7 @@
                         <label class="form-label" for="category">Category <span class="text-danger">*</span>
                         </label>
                         <select class="form-control" name="category" id="category">
-                        <option value="-1">Choose here</option>
+                            <option value="-1">Choose here</option>
                             <!-- fetch category from category table -->
                             <?php
                             require_once "./db-con.php";
@@ -69,9 +70,10 @@
                                 while ($row = mysqli_fetch_assoc($result)) {
                             ?>
 
-                            <option value="<?php echo $row['id'] ?>"> <?php echo $row['category'] ?>  </option>
+                                    <option value="<?php echo $row['id'] ?>"> <?php echo $row['category'] ?> </option>
 
-                            <?php  } } ?>
+                            <?php  }
+                            } ?>
                         </select>
                     </div>
 
