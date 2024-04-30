@@ -10,6 +10,9 @@ function uploadImage($targetDir = "", $file, $size, $direct)
     $max_size = $size * 1024 * 1024;
     $types = ['image/jpg', 'image/png', 'image/jpeg'];
 
+    // print_r($file);
+    // exit;
+
     if ($file['error'] === 0) {
 
         if ($file['size'] > $max_size) {
@@ -31,6 +34,7 @@ function uploadImage($targetDir = "", $file, $size, $direct)
             return $data;
         }
     } else {
+
         $_SESSION['imgErr'] = "something went wrong";
         header("Location:$direct.php");
     }
