@@ -151,14 +151,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <tbody>
 
                         <?php
-
                         $select = "SELECT * FROM categories";
                         $result = mysqli_query($con, $select);
 
                         if (mysqli_num_rows($result) > 0) {
-
                             while ($row = mysqli_fetch_assoc($result)) {
-
 
                         ?>
                                 <tr>
@@ -168,9 +165,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-success text-white dropdown-toggle" data-toggle="dropdown">Actions</button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Link 1</a>
-                                                <a class="dropdown-item" href="#">Link 2</a>
-                                                <a class="dropdown-item" href="#">Link 3</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Edit</a>
+                                                <a class="dropdown-item" href="category-delete-qry.php?id=<?= $row['id'] ?>"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
                                         </div>
                                     </td>

@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Products</title>
+    <title>View Users</title>
 
     <!-- css-links include -->
     <?php require_once("./includes/css-links.php") ?>
@@ -28,7 +28,7 @@
         <div class="container mt-3 bg-white p-4">
             <div class="row">
                 <div class="col-md-4">
-                    <h3> <i class="fa fa-eye text-success"></i>View Products</h3>
+                    <h3> <i class="fa fa-eye text-success"></i>View Users</h3>
                 </div>
                 <div class="col-md-8">
                     <?php
@@ -55,11 +55,11 @@
                 <table class="table table-striped table-bordered zero-configuration">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Unit Price</th>
-                            <th>Category</th>
                             <th>Image</th>
-                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -70,11 +70,9 @@
 
                         require_once("./db-con.php");
 
-                        $get_products = "SELECT products.*, categories.category FROM products 
-                    LEFT JOIN categories 
-                    ON products.category_id = categories.id";
+                        $get_users = "SELECT * FROM users";
 
-                        $result = mysqli_query($con, $get_products);
+                        $result = mysqli_query($con, $get_users);
 
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -83,11 +81,11 @@
                         ?>
 
                                 <tr>
+                                    <td><img src="./images/admin-users/<?php echo $row['image'] ?>" alt="Product Image" height="60px"></td>
                                     <td><?= $row['name'] ?></td>
-                                    <td><?= $row['unit_price'] ?></td>
-                                    <td><?= $row['category'] ?></td>
-                                    <td><img src="./images/product/<?php echo $row['image'] ?>" alt="Product Image" height="60px"></td>
-                                    <td><span class="badge bg-success text-white p-1"><?= $row['status'] ?></span></td>
+                                    <td><?= $row['email'] ?></td>
+                                    <td><?= $row['mobile'] ?></td>
+                                    <td><?= $row['address'] ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-success text-white dropdown-toggle" data-toggle="dropdown">Actions</button>

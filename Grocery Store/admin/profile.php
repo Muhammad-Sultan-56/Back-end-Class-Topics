@@ -30,8 +30,8 @@
             <div class='row page-titles mx-0'>
             <div class='col p-md-0'>
                 <ol class='breadcrumb'>
-                    <li class='breadcrumb-item'><a href='javascript:void(0)'>Dashboard</a></li>
-                    <li class='breadcrumb-item active'><a href='javascript:void(0)'>Home</a></li>
+                    <li class='breadcrumb-item'><a href='add-user.php'>Add <span class='text-success'>User</span></a></li>
+                    <li class='breadcrumb-item active'><a href='view-users.php'>View <span class='text-success'>Users</span></a></li>
                 </ol>
             </div>
         </div>
