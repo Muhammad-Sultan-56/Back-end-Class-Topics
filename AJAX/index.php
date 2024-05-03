@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="container w-75 shadow mx-auto mt-5 p-5">
+    <div class="container w-75 shadow mx-auto mt-5 p-4">
 
         <h3 class=" p-1 mb-2">Add <span class="text-primary"> User</span> Information</h3>
         <hr>
@@ -44,9 +44,13 @@
         </div>
 
         <!-- Show Data in table -->
-        <div class="row my-3">
+        <div class="row my-4">
             <div class="col-md-12">
-
+                <div class="d-flex my-2 justify-content-between align-items-center">
+                    <h3 class="w-50">View All <span class='text-primary'> User</span></h3>
+                    <input type="search" id="search" class="form-control w-50" placeholder="Search here...">
+                </div>
+                <hr>
                 <!-- get data in table from ajax -->
                 <div id="get_data">
 
@@ -55,6 +59,42 @@
 
             </div> <!--col -->
         </div> <!--row -->
+
+
+
+        <!-- modal with edit form -->
+
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Info</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- edit form in modal  -->
+                        <form>
+                            <div class="mb-3">
+                                <label for="fname" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="editFname">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="lname" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="editLname">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="updateBtn" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                    </form>
+                    <!-- form end -->
+                </div>
+            </div>
+        </div>
+
     </div> <!--container -->
 
 
@@ -118,10 +158,13 @@
 
 
             // show data from database in the table
-            function loadData() {
+            function loadData(query = null) {
                 $.ajax({
                     url: "./select-qry.php",
-                    type: "POST",
+                    type: "GET",
+                    data: {
+                        query: query
+                    },
                     success: function(res) {
                         $("#get_data").html(res);
                     }
@@ -131,8 +174,35 @@
             loadData();
 
 
+            // search function
+            $("#search").on("keyup", function() {
+                let searchText = $(this).val();
+                loadData(searchText);
+            })
+
 
             // edit form function of ajax by id
+            $(document).on("click", ".editBtn", function() {
+                let id = $(this).data("id")
+                $.ajax({
+                    url: "./edit-qry.php",
+                    type: "GET",
+                    data: {
+                        id: id
+                    },
+                    success: function(res) {
+                        let data = JSON.parse(res)
+                        // console.log(data.fname)
+                        $("#editFname").val(data.fname);
+                        $("#editLname").val(data.lname);
+                        $("#editModal").modal("show")
+                    }
+                })
+
+            })
+
+
+            // update 
 
 
 
