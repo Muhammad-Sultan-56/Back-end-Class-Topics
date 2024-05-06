@@ -74,13 +74,14 @@
                     <div class="modal-body">
                         <!-- edit form in modal  -->
                         <form>
+                            <input type="hidden" id="editId">
                             <div class="mb-3">
-                                <label for="fname" class="form-label">First Name</label>
+                                <label for="editFname" class="form-label">First Name</label>
                                 <input type="text" class="form-control" id="editFname">
                             </div>
 
                             <div class="mb-3">
-                                <label for="lname" class="form-label">Last Name</label>
+                                <label for="editLname" class="form-label">Last Name</label>
                                 <input type="text" class="form-control" id="editLname">
                             </div>
                     </div>
@@ -94,6 +95,31 @@
                 </div>
             </div>
         </div>
+
+
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- delete id form in modal  -->
+                    <form>
+                        <div class="modal-body text-end">
+                            <input type="hidden" id="deleteId">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
+                        </div>
+                </div>
+
+                </form>
+                <!-- form end -->
+            </div>
+        </div>
+    </div>
+
 
     </div> <!--container -->
 
@@ -150,11 +176,12 @@
                             $("#lname").val("");
                             loadData();
                         }
-                    }) //ajax closing
+                    }) //insert ajax closing
 
                 }
 
             }) // button click closing
+
 
 
             // show data from database in the table
@@ -168,7 +195,7 @@
                     success: function(res) {
                         $("#get_data").html(res);
                     }
-                })
+                }) // loadData ajax
             }
 
             loadData();
@@ -185,7 +212,7 @@
             $(document).on("click", ".editBtn", function() {
                 let id = $(this).data("id")
                 $.ajax({
-                    url: "./edit-qry.php",
+                    url: "./single-record-qry.php",
                     type: "GET",
                     data: {
                         id: id
@@ -193,16 +220,123 @@
                     success: function(res) {
                         let data = JSON.parse(res)
                         // console.log(data.fname)
+
                         $("#editFname").val(data.fname);
                         $("#editLname").val(data.lname);
+                        $("#editId").val(data.id);
+
                         $("#editModal").modal("show")
                     }
-                })
+                }) // edit ajax 
 
             })
 
 
-            // update 
+            // update query when information changed in modal
+            $("#updateBtn").on("click", function() {
+
+                if ($("#editFname").val() == "" || $("#editLname").val() == "") {
+                    // run when empty inputs submited
+                    $("#error").html("<b>Warning! </b> All fields are required....!").show();
+                    setTimeout(() => {
+                        $(".msg").hide();
+                    }, 3000)
+                    $("#editModal").modal("hide")
+
+                } else {
+                    $.ajax({
+                        url: "update-qry.php",
+                        type: "POST",
+                        data: {
+                            id: $("#editId").val(),
+                            fname: $("#editFname").val(),
+                            lname: $("#editLname").val(),
+                        },
+                        success: function(res) {
+                            // run when query is successfully run
+                            if (res == 1) {
+                                $("#success").html("<b>Congratulations! </b> Operation Performed successfully....!").show();
+                                setTimeout(() => {
+                                    $(".msg").hide();
+                                }, 3000)
+
+                                $("#editModal").modal("hide")
+
+                            } else {
+                                // run when query is not run
+                                $("#error").html("<b>Warning! </b> Something went wrong....!").show();
+                                setTimeout(() => {
+                                    $(".msg").hide();
+                                }, 3000)
+                                $("#editModal").modal("hide")
+                            }
+                            loadData()
+                        }
+                    }) //update ajax
+                }
+            })
+
+
+
+
+
+            // get data form to delete function of ajax by id
+            $(document).on("click", ".deleteBtn", function() {
+                let id = $(this).data("id")
+
+                $.ajax({
+                    url: "./single-record-qry.php",
+                    type: "GET",
+                    data: {
+                        id: id
+                    },
+                    success: function(res) {
+                        let data = JSON.parse(res);
+
+                        $("#deleteId").val(data.id);
+                        $("#deleteModal").modal("show")
+                    }
+                }) // edit ajax 
+
+            })
+
+
+
+            // delete query when information is deleted
+            $("#deleteBtn").on("click", function() {
+
+                $.ajax({
+                    url: "delete-qry.php",
+                    type: "POST",
+                    data: {
+                        id: $("#deleteId").val(),
+
+                    },
+                    success: function(res) {
+                        // run when query is successfully run
+                        if (res == 1) {
+                            $("#success").html("<b>Congratulations! </b> Operation Performed successfully....!").show();
+                            setTimeout(() => {
+                                $(".msg").hide();
+                            }, 3000)
+
+                            $("#deleteModal").modal("hide")
+
+                        } else {
+                            // run when query is not run
+                            $("#error").html("<b>Warning! </b> Something went wrong....!").show();
+                            setTimeout(() => {
+                                $(".msg").hide();
+                            }, 3000)
+                            $("#deleteModal").modal("hide")
+                        }
+                        loadData()
+                    }
+                }) //update ajax
+
+            })
+
+
 
 
 
