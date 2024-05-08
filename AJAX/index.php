@@ -8,9 +8,9 @@
 </head>
 
 <body>
-    <div class="container w-75 shadow mx-auto mt-5 p-4">
+    <div class="container w-75 shadow mx-auto mt-4 px-4 py-2">
 
-        <h3 class=" p-1 mb-2">Add <span class="text-primary"> User</span> Information</h3>
+        <h3 class=" p-1 mb-2">Add <span class="text-primary"> User</span></h3>
         <hr>
 
         <div class="row">
@@ -27,7 +27,7 @@
 
         <!-- form to get data from user -->
         <div class="row ">
-            <div class="col-md-4 px-3 mt-2">
+            <div class="col-md-4 px-3 mt-1">
                 <label class="form-label">First Name</label>
                 <input type="text" class="form-control  mb-3" id="fname" placeholder="Enter here..." />
             </div>
@@ -44,13 +44,12 @@
         </div>
 
         <!-- Show Data in table -->
-        <div class="row my-4">
+        <div class="row mt-4">
             <div class="col-md-12">
                 <div class="d-flex my-2 justify-content-between align-items-center">
-                    <h3 class="w-50">View All <span class='text-primary'> User</span></h3>
+                    <h3 class="w-50">View <span class='text-primary'> Users</span></h3>
                     <input type="search" id="search" class="form-control w-50" placeholder="Search here...">
                 </div>
-                <hr>
                 <!-- get data in table from ajax -->
                 <div id="get_data">
 

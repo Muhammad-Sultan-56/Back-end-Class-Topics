@@ -24,7 +24,7 @@ $select_qry .= " LIMIT $limit OFFSET $offset";
 $result = mysqli_query($db_con, $select_qry);
 
 $html = "<table class='table table-striped table-hover'>";
-$html .= "<thead> <tr>";
+$html .= "<thead class='bg-secondary text-white'> <tr>";
 $html .= "<th>#</th>";
 $html .= "<th>First Name</th>";
 $html .= "<th>Last Name</th>";
@@ -59,7 +59,7 @@ $totals = mysqli_fetch_array($result2);
 
 $total_pages = ceil($totals['total'] / $limit);
 
-$html .= "<nav> <ul class='pagination pagination-sm'>";
+$html .= "<nav> <ul class='pagination pagination-sm justify-content-center mt-3'>";
 
 for ($i = 1; $i <= $total_pages; $i++) {
     if ($page == $i) {
