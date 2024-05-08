@@ -174,7 +174,7 @@
                             // empty input after insertion
                             $("#fname").val("");
                             $("#lname").val("");
-                            loadData();
+                            loadData(1);
                         }
                     }) //insert ajax closing
 
@@ -185,12 +185,13 @@
 
 
             // show data from database in the table
-            function loadData(query = null) {
+            function loadData(page, query = null) {
                 $.ajax({
                     url: "./select-qry.php",
                     type: "GET",
                     data: {
-                        query: query
+                        query: query,
+                        page: page
                     },
                     success: function(res) {
                         $("#get_data").html(res);
@@ -198,13 +199,13 @@
                 }) // loadData ajax
             }
 
-            loadData();
+            loadData(1);
 
 
             // search function
             $("#search").on("keyup", function() {
                 let searchText = $(this).val();
-                loadData(searchText);
+                loadData(1, searchText);
             })
 
 
@@ -270,13 +271,28 @@
                                 }, 3000)
                                 $("#editModal").modal("hide")
                             }
-                            loadData()
+                            loadData(1)
                         }
                     }) //update ajax
                 }
             })
 
 
+
+            // pagination code
+
+            $(document).on("click", ".page", function() {
+                let page = $(this).data("page")
+
+                loadData(page)
+
+                let searchText = $("#search").val();
+                if (search.length > 0) {
+                    loadData(page, search);
+                } else {
+                    loadData(page);
+                }
+            })
 
 
 
@@ -330,7 +346,7 @@
                             }, 3000)
                             $("#deleteModal").modal("hide")
                         }
-                        loadData()
+                        loadData(1)
                     }
                 }) //update ajax
 

@@ -1,6 +1,6 @@
 <?php
 
-function uploadImage($targetDir = "", $file, $size, $direct)
+function uploadImage($targetDir, $file, $size, $direct)
 {
     $targetDir = "images/$targetDir/";
     $newName   = time() . $file['name'];
