@@ -31,7 +31,7 @@ function getImageUrl($folder, $image)
 function getProducts($con, $category = null, $id = null)
 {
     // get all products
-    $sql = "SELECT * FROM products LIMIT 8 ";
+    $sql = "SELECT * FROM products  ";
 
     // with id
     if ($category != null) {
