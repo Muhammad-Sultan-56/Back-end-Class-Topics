@@ -1,3 +1,5 @@
+    <?php require_once("db-con.php") ?>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -5,7 +7,7 @@
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
-        <div class="humberger__menu__wrapper">
+    <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
             <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
@@ -143,8 +145,8 @@
     <!-- Header Section End -->
 
 
-        <!-- Hero Section Begin -->
-        <section class="hero hero-normal">
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
